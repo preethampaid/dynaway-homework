@@ -21,3 +21,7 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-alert [isOpen]="isAlertOpen" header="{{alertHeader}}" message="{{alertMessage}}" [buttons]="alertButtons"
+  (didDismiss)="manageAlertVisibility(false)">
+</ion-alert>

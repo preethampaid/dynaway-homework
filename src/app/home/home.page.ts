@@ -9,6 +9,10 @@ import { AssetService } from '../shared/services/asset.service'
 })
 export class HomePage {
   assets: Asset[] = [];
+  isAlertOpen: boolean = false;
+  alertHeader: string = 'Error';
+  alertMessage: string = 'An unexpected error has occured. Please try again after some time.';
+  alertButtons = ['OK'];
 
   constructor(private assetService: AssetService) {}
 
@@ -21,8 +25,12 @@ export class HomePage {
         }
       },
       error: () => {
-        console.log('error');
+        this.manageAlertVisibility(true);
       }
     });
+  }
+
+  manageAlertVisibility(isOpen: boolean) {
+    this.isAlertOpen = isOpen;
   }
 }
