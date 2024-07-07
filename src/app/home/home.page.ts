@@ -8,12 +8,21 @@ import { AssetService } from '../shared/services/asset.service'
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  assets: Asset[] = []
+  assets: Asset[] = [];
 
   constructor(private assetService: AssetService) {}
 
   ionViewWillEnter(): void {
-    this.assets = []
-    this.assetService.getAll().subscribe(assets => this.assets = assets)
+    this.assets = [];
+    this.assetService.getAll().subscribe({
+      next: (assets) => {
+        if (assets.ok) {
+          this.assets = assets.data;
+        }
+      },
+      error: () => {
+        console.log('error');
+      }
+    });
   }
 }
