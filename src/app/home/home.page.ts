@@ -9,6 +9,7 @@ import { AssetService } from '../shared/services/asset.service'
 })
 export class HomePage {
   assets: Asset[] = [];
+  skeletonList: Asset[] = Array(6).fill(undefined);
   isAlertOpen: boolean = false;
   alertHeader: string = 'Error';
   alertMessage: string = 'An unexpected error has occured. Please try again after some time.';
@@ -32,5 +33,9 @@ export class HomePage {
 
   manageAlertVisibility(isOpen: boolean) {
     this.isAlertOpen = isOpen;
+  }
+
+  get displayedAssets() {
+    return this.assets.length > 0 ? this.assets : this.skeletonList;
   }
 }
